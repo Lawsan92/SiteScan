@@ -1,6 +1,7 @@
 from matplotlib import pyplot as plt
 import datacommons
 from datacommons_client.client import DataCommonsClient
+import mpld3
 
 def API_fetch(zip_code):
 
@@ -13,7 +14,7 @@ def API_fetch(zip_code):
       entity_dcids=[f'zip/{zip_code}']
   )
 
-  response_body = response.byVariable['Count_Person'].byEntity['zip/78735'].orderedFacets[0].observations
+  response_body = response.byVariable['Count_Person'].byEntity[f'zip/{zip_code}'].orderedFacets[0].observations
   filtered_response_body = [item for item in response_body if 2013 <= int(item.date)]
   return filtered_response_body
 
@@ -27,6 +28,12 @@ def draw_line_graph(response):
 
   # draw the line graph
   plt.plot(year_list, population_list)
+  graph = plt.gcf()
+  graph_html = mpld3.fig_to_html(graph)
+  return graph_html
+
+
+
 
 def draw_table(response):
   # Column labels
@@ -51,11 +58,12 @@ def draw_table(response):
   # Create the table
   table = ax.table(cellText=table_data, colLabels=col_labels, loc='center', cellLoc='center')
   # Show the plot
-  plt.show()
-  return
+  table = plt.gcf()
+  table_html = mpld3.fig_to_html(table)
+  return table_html
 
 # # main logic
-# response = API_fetch('78735')
-# print(response)
-# draw_line_graph(response)
-# draw_table(response)
+response = API_fetch('78735')
+print(response)
+draw_line_graph(response)
+draw_table(response)
