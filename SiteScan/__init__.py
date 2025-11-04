@@ -63,7 +63,7 @@ def draw_table(response):
   return table_html
 
 # # main logic
-response = API_fetch('78735')
-print(response)
-draw_line_graph(response)
-draw_table(response)
+# response = API_fetch('78735')
+# print(response)
+# draw_line_graph(response)
+# draw_table(response)

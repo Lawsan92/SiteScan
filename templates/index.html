@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>SiteScan</title>
 </head>
 <body>
-    <h1>Hello</h1>
-    <div>{{ dataset }}</div>
+    <h1>SiteScan</h1>
+    <div id="graph">{{ graph|safe }}</div>
+    <div id="table">{{ table|safe }}</div>
     <ul>
         {% for item in dataset %}
         <li>{{ item }}</li>
         {% endfor %}
     </ul>
-    <div id="graph">{{ graph|safe }}</div>
-    <div id="table">{{ table|safe }}</div>
 </body>
 </html>
