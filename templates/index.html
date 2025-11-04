@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello</title>
-    <h1>Hello</h1>
 </head>
 <body>
-
+    <h1>Hello</h1>
+    <div>{{ dataset }}</div>
+    <ul>
+        {% for item in dataset %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

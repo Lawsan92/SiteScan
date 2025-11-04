@@ -2,9 +2,7 @@ from matplotlib import pyplot as plt
 import datacommons
 from datacommons_client.client import DataCommonsClient
 
-zip_code = '78735'
-
-def API_fetch():
+def API_fetch(zip_code):
 
   api_key = "AIzaSyCTI4Xz-UW_G2Q2RfknhcfdAnTHq5X5XuI" # Replace with your API key
   client = DataCommonsClient(api_key=api_key)
@@ -56,8 +54,8 @@ def draw_table(response):
   plt.show()
   return
 
-# main logic
-response = API_fetch()
-print(response)
-draw_line_graph(response)
-draw_table(response)
+# # main logic
+# response = API_fetch('78735')
+# print(response)
+# draw_line_graph(response)
+# draw_table(response)
