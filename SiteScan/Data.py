@@ -1,8 +1,7 @@
+import base64
+from io import BytesIO
 from matplotlib import pyplot as plt
-import datacommons
 from datacommons_client.client import DataCommonsClient
-import mpld3
-
 
 class Data:
     def __init__(self, user_zip):
@@ -37,9 +36,18 @@ class Data:
             population_list.append(float(item.value))
 
         # draw the line graph
-        plt.plot(year_list, population_list)
-        graph = plt.gcf()
-        graph_html = mpld3.fig_to_html(graph)
+        plt.figure(figsize=(10, 6))
+        plt.title('Population of 78735')
+        plt.xlabel('Year')
+        plt.ylabel('Population (in thousands)')
+        plt.plot(year_list, population_list, color='blue')
+
+        # convert graph to base64 image and inject in html <img> template
+        graph_file = BytesIO()
+        plt.savefig(graph_file, format='png')
+        graph_file_encoded = base64.b64encode(graph_file.getvalue()).decode('utf-8')
+
+        graph_html = '<html>' + '<img src=\'data:image/png;base64,{}\'>'.format(graph_file_encoded) + '</html>'
         return graph_html
 
     def graph_data_table(self):
@@ -64,8 +72,13 @@ class Data:
         ax.axis('tight')  # Adjust limits to fit the table
 
         # Create the table
-        table = ax.table(cellText=table_data, colLabels=col_labels, loc='center', cellLoc='center')
-        # Show the plot
-        table = plt.gcf()
-        table_html = mpld3.fig_to_html(table)
+        ax.table(cellText=table_data, colLabels=col_labels, loc='center', cellLoc='center')
+
+        #convert table to base64 image and inject in html <img> template
+        table_file = BytesIO()
+        fig.savefig(table_file, format='png')
+        table_file_encoded = base64.b64encode(table_file.getvalue()).decode('utf-8')
+
+        table_html = '<html>' + '<img src=\'data:image/png;base64,{}\'>'.format(table_file_encoded) + '</html>'
+
         return table_html

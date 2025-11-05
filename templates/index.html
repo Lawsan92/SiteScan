@@ -8,10 +8,12 @@
     <h1>SiteScan</h1>
     <div id="line_graph">{{ line_graph|safe }}</div>
     <div id="table">{{ table|safe }}</div>
-    <ul>
-        {% for item in dataset %}
-        <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+    <div id="dataset">
+        <ul>
+            {% for item in dataset %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
