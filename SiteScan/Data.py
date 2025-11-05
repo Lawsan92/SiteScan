@@ -82,4 +82,50 @@ class Data:
 
         table_html = '<img src=\'data:image/png;base64,{}\'>'.format(table_file_encoded)
 
-        return table_html
+        return
+
+    def model_data(self):
+        api_key = "AIzaSyCTI4Xz-UW_G2Q2RfknhcfdAnTHq5X5XuI"  # Replace with your API key
+        client = DataCommonsClient(api_key=api_key)
+        raw_data = client.observation.fetch(
+            variable_dcids=[
+                "Count_Person",
+                "Mean_Income_Household",
+                'Median_HomeValue_HousingUnit_OccupiedHousingUnit_OwnerOccupied',
+                'Mean_CommuteTime_Person_Years16Onwards_WorkCommute_Employed_WorkedOutsideOfHome',
+                'Count_HousingUnit',
+                'Count_Person_BelowPovertyLevelInThePast12Months',
+            ],
+            date='all',
+            entity_dcids=["zip/78735", "zip/78730"]
+        )
+        data_model = {}
+        data_keys = [
+            "Count_Person",
+            "Mean_Income_Household",
+            'Median_HomeValue_HousingUnit_OccupiedHousingUnit_OwnerOccupied',
+            'Mean_CommuteTime_Person_Years16Onwards_WorkCommute_Employed_WorkedOutsideOfHome',
+            'Count_HousingUnit',
+            'Count_Person_BelowPovertyLevelInThePast12Months',
+        ]
+        zip_keys = [78735, 78730]
+
+        for key in data_keys:
+            for dataset in raw_data.byVariable[key]:
+                for zip_key in zip_keys:
+                    filtered_dataset = dataset[1][f'zip/{zip_key}'].orderedFacets[0].observations
+                    for entry in filtered_dataset:
+                        year = entry.date
+                        value = entry.value
+                        model_key = '[' + str(year) + '|' + str(zip_key) + ']'
+                        if model_key not in data_model:
+                            data_model[model_key] = []
+                        data_model[model_key].append([key, value])
+
+        print('data_model:', data_model)
+
+        return data_model
+
+# main logic
+data = Data('78735')
+data.model_data()
