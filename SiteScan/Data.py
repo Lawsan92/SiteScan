@@ -1,13 +1,16 @@
 import base64
+from inspect import cleandoc
 from io import BytesIO
 from matplotlib import pyplot as plt
 from datacommons_client.client import DataCommonsClient
+import csv
 
 class Data:
     def __init__(self, user_zip):
         self.zip = user_zip
         self.data = self.API_fetch()
         self.line_graph = self.graph_data_line()
+        self.cleaned_data = self.model_data()
 
     def API_fetch(self):
         zip_code = self.zip
@@ -97,7 +100,7 @@ class Data:
                 'Count_Person_BelowPovertyLevelInThePast12Months',
             ],
             date='all',
-            entity_dcids=["zip/78735", "zip/78730"]
+            entity_dcids=['zip/78735', 'zip/78730', 'zip/78721', 'zip/78729', 'zip/78734', 'zip/78652', 'zip/78725', 'zip/78617', 'zip/78703', 'zip/78645']
         )
         data_model = {}
         data_keys = [
@@ -108,7 +111,7 @@ class Data:
             'Count_HousingUnit',
             'Count_Person_BelowPovertyLevelInThePast12Months',
         ]
-        zip_keys = [78735, 78730]
+        zip_keys = [78735, 78730, 78721, 78729, 78734, 78652, 78725, 78617, 78703, 78645]
 
         for key in data_keys:
             for dataset in raw_data.byVariable[key]:
@@ -121,11 +124,18 @@ class Data:
                         if model_key not in data_model:
                             data_model[model_key] = []
                         data_model[model_key].append([key, value])
-
-        print('data_model:', data_model)
-
         return data_model
+
+    def save_data(self):
+        cleaned_data = self.cleaned_data
+        with open('dataset.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['Year', 'Zip Code', 'Population', 'Income', 'Home Value', 'Commute Time', 'Poverty'])
+            for key, entry in cleaned_data.items():
+                writer.writerow([key.split('|')[0], key.split('|')[1], entry[0][1], entry[1][1], entry[2][1], entry[3][1], entry[4][1]])
+        return
 
 # main logic
 data = Data('78735')
 data.model_data()
+data.save_data()
