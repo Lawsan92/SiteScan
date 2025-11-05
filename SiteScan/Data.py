@@ -35,26 +35,19 @@ class Data:
             year_list.append(int(item.date))
             population_list.append(float(item.value))
 
-        # draw the line graph
+        # draw the line graph, i.e., the matplotlib plot figure
         plt.figure(figsize=(10, 6))
-        plt.title('Population of 78735')
+        plt.title(f'Population of {self.zip}')
         plt.xlabel('Year')
         plt.ylabel('Population (in thousands)')
         plt.plot(year_list, population_list, color='blue')
 
-        '''
-        matplotlib graphics aren't naturally fit to be rendered in an HTML page.
-        Here are the steps to reolve this:
-        - Create a buffer file to store the graphics as a PNG image
-        - Encode the raw image data from the buffer file to base64 encoding
-        - Decode the base64 encoding to a utf-8 encoding
-        - Inject the utf8 encoding to an HTML template  
-        '''
+        # convert the figure into a PNG and save it to a buffer file
         graph_buffer_file = BytesIO()
         plt.savefig(graph_buffer_file, format='png')
+        # encode the PNG file into base64, decode it to utf-8, embed it in a src attribute
         graph_buffer_file_base64 = base64.b64encode(graph_buffer_file.getvalue())
         graph_buffer_file_html = graph_buffer_file_base64.decode('utf-8')
-
         graph_html = '<img src=\'data:image/png;base64,{}\'>'.format(graph_buffer_file_html)
         return graph_html
 

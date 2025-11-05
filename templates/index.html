@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>SiteScan</title>
+    <style>
+        .content {
+            display: flex;
+            flex-direction: row;
+            max-width: 100vw;
+        }
+        .line_graph {
+            max-width: 50%;
+            flex-shrink: 1;
+        }
+        .table {
+            max-width: 50%;
+            flex-shrink: 1;
+        }
+    </style>
 </head>
 <body>
     <h1>SiteScan</h1>
@@ -11,7 +26,14 @@
         {{ form }}
         <input type="submit" value="Search">
     </form>
-    <div id="line_graph">{{ line_graph|safe }}</div>
-    <div id="table">{{ table|safe }}</div>
+    <div class="content">
+        {% if dataset %}
+        <div className="line_graph">{{ line_graph|safe }}</div>
+        <div className="table">{{ table|safe }}</div>
+            {% else %}
+            {% load static %}
+            <img src="{% static 'template_plot.png' %}" alt="No data"/>
+        {% endif %}
+    </div>
 </body>
 </html>
