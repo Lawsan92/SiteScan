@@ -6,14 +6,12 @@
 </head>
 <body>
     <h1>SiteScan</h1>
+    <form action="/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Search">
+    </form>
     <div id="line_graph">{{ line_graph|safe }}</div>
     <div id="table">{{ table|safe }}</div>
-    <div id="dataset">
-        <ul>
-            {% for item in dataset %}
-            <li>{{ item }}</li>
-            {% endfor %}
-        </ul>
-    </div>
 </body>
 </html>

@@ -42,12 +42,20 @@ class Data:
         plt.ylabel('Population (in thousands)')
         plt.plot(year_list, population_list, color='blue')
 
-        # convert graph to base64 image and inject in html <img> template
-        graph_file = BytesIO()
-        plt.savefig(graph_file, format='png')
-        graph_file_encoded = base64.b64encode(graph_file.getvalue()).decode('utf-8')
+        '''
+        matplotlib graphics aren't naturally fit to be rendered in an HTML page.
+        Here are the steps to reolve this:
+        - Create a buffer file to store the graphics as a PNG image
+        - Encode the raw image data from the buffer file to base64 encoding
+        - Decode the base64 encoding to a utf-8 encoding
+        - Inject the utf8 encoding to an HTML template  
+        '''
+        graph_buffer_file = BytesIO()
+        plt.savefig(graph_buffer_file, format='png')
+        graph_buffer_file_base64 = base64.b64encode(graph_buffer_file.getvalue())
+        graph_buffer_file_html = graph_buffer_file_base64.decode('utf-8')
 
-        graph_html = '<html>' + '<img src=\'data:image/png;base64,{}\'>'.format(graph_file_encoded) + '</html>'
+        graph_html = '<img src=\'data:image/png;base64,{}\'>'.format(graph_buffer_file_html)
         return graph_html
 
     def graph_data_table(self):
@@ -79,6 +87,6 @@ class Data:
         fig.savefig(table_file, format='png')
         table_file_encoded = base64.b64encode(table_file.getvalue()).decode('utf-8')
 
-        table_html = '<html>' + '<img src=\'data:image/png;base64,{}\'>'.format(table_file_encoded) + '</html>'
+        table_html = '<img src=\'data:image/png;base64,{}\'>'.format(table_file_encoded)
 
         return table_html
