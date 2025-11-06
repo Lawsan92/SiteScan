@@ -67,6 +67,7 @@ class Database:
             for key, entry in self.data.items():
                 writer.writerow([key.split('|')[0], key.split('|')[1], entry[0][1], entry[1][1], entry[2][1], entry[3][1], entry[4][1]])
         return
+
     def get_data(self):
         return self.data
 
