@@ -19,7 +19,10 @@ class Data:
             date='',
             entity_dcids=[f'zip/{zip_code}']
         )
+        print(response)
 
+        if len(response.byVariable['Count_Person'].byEntity[f'zip/{zip_code}'].orderedFacets) == 0:
+            return []
         response_body = response.byVariable['Count_Person'].byEntity[f'zip/{zip_code}'].orderedFacets[0].observations
         filtered_response_body = [item for item in response_body if 2013 <= int(item.date)]
         return filtered_response_body
