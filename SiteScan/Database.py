@@ -40,7 +40,18 @@ class Database:
             for dataset in self.data.byVariable[key]:
                 for zip_key in zip_keys:
                     filtered_dataset = dataset[1][f'zip/{zip_key}'].orderedFacets[0].observations
-                    for entry in filtered_dataset:
+                    for i, entry in enumerate(filtered_dataset):
+                        def missing_entry():
+                            if i < len(filtered_dataset) - 1:
+                                if int(filtered_dataset[i + 1].date) != int(filtered_dataset[i].date) + 1:
+                                    print(filtered_dataset[i + 1].date, filtered_dataset[i].date)
+                                    dummy_data = type('Observation', (object,), {
+                                        'date': int(filtered_dataset[i].date) + 1,
+                                        'value': 'null'
+                                    })
+                                    filtered_dataset.insert(i + 1, dummy_data)
+                            return
+                        missing_entry()
                         year = entry.date
                         value = entry.value
                         model_key = '[' + str(year) + '|' + str(zip_key) + ']'
@@ -56,9 +67,15 @@ class Database:
             for key, entry in self.data.items():
                 writer.writerow([key.split('|')[0], key.split('|')[1], entry[0][1], entry[1][1], entry[2][1], entry[3][1], entry[4][1]])
         return
+    def get_data(self):
+        return self.data
 
 # main logic
-data = Database()
-data.API_fetch()
-data.model_data()
-data.save_data()
+def main():
+    data = Database()
+    data.API_fetch()
+    data.model_data()
+    data.save_data()
+    return
+
+main()

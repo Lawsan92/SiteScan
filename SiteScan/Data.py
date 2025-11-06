@@ -1,9 +1,7 @@
 import base64
-from inspect import cleandoc
 from io import BytesIO
 from matplotlib import pyplot as plt
 from datacommons_client.client import DataCommonsClient
-import csv
 
 class Data:
     def __init__(self, user_zip):
@@ -81,7 +79,6 @@ class Data:
         table_file = BytesIO()
         fig.savefig(table_file, format='png')
         table_file_encoded = base64.b64encode(table_file.getvalue()).decode('utf-8')
-
         table_html = '<img src=\'data:image/png;base64,{}\'>'.format(table_file_encoded)
 
         return table_html
