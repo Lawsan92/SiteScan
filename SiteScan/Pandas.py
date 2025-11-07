@@ -13,7 +13,7 @@ class PandaDataframe:
         print('loading data')
         # create dataframe and load it with raw CSV data
         dataframe = pd.DataFrame(pd.read_csv(
-            'dataset.csv',
+            'csv/dataset.csv',
             usecols=[2, 3, 4, 5, 6],
             header=0,
             names=['Population_diff', 'Income_diff', 'Home Value_diff', 'Commute Time_diff', 'Poverty_diff']))
@@ -34,7 +34,7 @@ class PandaDataframe:
 
     def readd_keys(self):
         composite_keys_dataframe = pd.DataFrame(pd.read_csv(
-            'dataset.csv', usecols=[0, 1], header=0))
+            'csv/dataset.csv', usecols=[0, 1], header=0))
         self.dataframe.insert(0, 'Year', composite_keys_dataframe['Year'])
         self.dataframe.insert(1, 'Zip Code', composite_keys_dataframe['Zip Code'])
 
@@ -42,7 +42,7 @@ class PandaDataframe:
         self.dataframe = self.dataframe.drop(columns=['Population_diff', 'Income_diff', 'Home Value_diff', 'Commute Time_diff', 'Poverty_diff'])
 
     def save_dataframe(self):
-        self.dataframe.to_csv('discrete_dataset.csv')
+        self.dataframe.to_csv('csv/discrete_dataset.csv')
         print('dataframe saved')
         return
 
@@ -60,7 +60,7 @@ class PandaDataframe:
 
 
     def save_binned_dataframe(self):
-        with open('binned_dataset.csv', 'w', newline='') as csvfile:
+        with open('csv/binned_dataset.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerows(self.binned_dataframe)
         return

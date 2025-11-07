@@ -61,7 +61,7 @@ class Database:
         self.data = data_model
 
     def save_data(self):
-        with open('dataset.csv', 'w', newline='') as csvfile:
+        with open('csv/dataset.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(['Year', 'Zip Code', 'Population', 'Income', 'Home Value', 'Commute Time', 'Poverty'])
             for key, entry in self.data.items():
