@@ -65,7 +65,11 @@ class PandaDataframe:
             writer.writerows(self.binned_dataframe)
         return
 
+    def save_data(self):
+        self.dataframe.to_csv('csv/research_dataset.csv', index=False)
 
+    def print(self):
+        print(self.dataframe)
 
 def main():
     panda = PandaDataframe()
@@ -79,3 +83,13 @@ def main():
     panda.save_dataframe()
     return
 main()
+
+# def main_2():
+#     panda = PandaDataframe()
+#     panda.load_dataframe()
+#     panda.to_percentages(panda.dataframe)
+#     panda.readd_keys()
+#     panda.print()
+#     # panda.save_data()
+#
+# main_2()

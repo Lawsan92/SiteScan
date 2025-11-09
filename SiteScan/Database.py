@@ -18,7 +18,7 @@ class Database:
                 'Count_Person_BelowPovertyLevelInThePast12Months',
             ],
             date='all',
-            entity_dcids=['zip/78735', 'zip/78730', 'zip/78721', 'zip/78729', 'zip/78734', 'zip/78652', 'zip/78725', 'zip/78617', 'zip/78703', 'zip/78645']
+            entity_dcids=['zip/78735', 'zip/78730', 'zip/78721', 'zip/78729', 'zip/78734', 'zip/78652', 'zip/78725', 'zip/78617', 'zip/78703', 'zip/78645', 'zip/78701']
         )
 
     def print(self):
@@ -34,7 +34,7 @@ class Database:
             'Count_HousingUnit',
             'Count_Person_BelowPovertyLevelInThePast12Months',
         ]
-        zip_keys = [78735, 78730, 78721, 78729, 78734, 78652, 78725, 78617, 78703, 78645]
+        zip_keys = [78735, 78730, 78721, 78729, 78734, 78652, 78725, 78617, 78703, 78645, 78701]
 
         for key in data_keys:
             for dataset in self.data.byVariable[key]:

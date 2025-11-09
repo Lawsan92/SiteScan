@@ -23,13 +23,25 @@ class UnsupervisedModel:
         print(self.data)
 
     def apriori_model(self):
-        print(apriori(self.data, min_support=0.6, use_colnames=True))
+        apriori_itemsets = apriori(self.data, min_support=0.4, use_colnames=True)
+        apriori_itemsets['length'] = apriori_itemsets['itemsets'].apply(lambda x: len(x))
+        apriori_itemsets = apriori_itemsets[(apriori_itemsets['length'] >= 2) &
+                          (apriori_itemsets['support'] >= 0.4)]
 
+        apriori_itemsets = apriori_itemsets.sort_values(by='support', ascending=False)
+        return apriori_itemsets
+
+    def save_model(self):
+        with open('csv/apriori_model.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerows(self.apriori_model())
 
 def main():
     model = UnsupervisedModel()
     model.load_data()
     model.transaction_encoder()
     model.apriori_model()
+    print(model.apriori_model())
+    model.save_model()
     return
 main()
