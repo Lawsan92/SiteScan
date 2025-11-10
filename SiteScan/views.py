@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render
-from .Data import Data
+from .DataUI import Data
 from .forms import SiteScanForm
 def index(request):
     template = loader.get_template('index.html')

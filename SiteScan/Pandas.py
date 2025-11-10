@@ -21,11 +21,13 @@ class PandaDataframe:
         self.dataframe = dataframe
 
     def to_percentages(self, dataframe):
+        print('converting to datapoints percentages')
         self.dataframe = self.dataframe.pct_change()
         self.dataframe = self.dataframe.apply(lambda x: x * 100)
         self.dataframe = self.dataframe.round(2)
 
     def fill_discretes(self):
+        print('adding discrete columns')
         cont_cols = self.dataframe.columns
         discrete_cols = ['pop_increase', 'income_increase', 'home_value_increase', 'commute_time_increase', 'poverty_increase']
         for i, col in enumerate(cont_cols):
@@ -33,6 +35,7 @@ class PandaDataframe:
             self.dataframe.loc[self.dataframe[col] < 0, discrete_cols[i]] = False
 
     def readd_keys(self):
+        print('adding composite keys')
         composite_keys_dataframe = pd.DataFrame(pd.read_csv(
             'csv/dataset.csv', usecols=[0, 1], header=0))
         self.dataframe.insert(0, 'Year', composite_keys_dataframe['Year'])
@@ -42,11 +45,13 @@ class PandaDataframe:
         self.dataframe = self.dataframe.drop(columns=['Population_diff', 'Income_diff', 'Home Value_diff', 'Commute Time_diff', 'Poverty_diff'])
 
     def save_dataframe(self):
+        print('saving discrete dataframe')
         self.dataframe.to_csv('csv/discrete_dataset.csv')
         print('dataframe saved')
         return
 
     def bin_items(self):
+        print('binning items')
         dataframe  = self.dataframe
         cols = dataframe.columns
         itemsets = []
@@ -60,6 +65,7 @@ class PandaDataframe:
 
 
     def save_binned_dataframe(self):
+        print('saving binned dataframe')
         with open('csv/binned_dataset.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerows(self.binned_dataframe)
@@ -71,25 +77,24 @@ class PandaDataframe:
     def print(self):
         print(self.dataframe)
 
-def main():
-    panda = PandaDataframe()
-    panda.load_dataframe()
-    panda.to_percentages(panda.dataframe)
-    panda.fill_discretes()
-    panda.filter_cont_cols()
-    panda.bin_items()
-    panda.save_binned_dataframe()
-    panda.readd_keys()
-    panda.save_dataframe()
-    return
-main()
-
+# def main():
+#     panda = PandaDataframe()
+#     panda.load_dataframe()
+#     panda.to_percentages(panda.dataframe)
+#     panda.fill_discretes()
+#     panda.filter_cont_cols()
+#     panda.bin_items()
+#     panda.save_binned_dataframe()
+#     panda.readd_keys()
+#     panda.save_dataframe()
+#     return
+# main()
+#
 # def main_2():
 #     panda = PandaDataframe()
 #     panda.load_dataframe()
 #     panda.to_percentages(panda.dataframe)
 #     panda.readd_keys()
-#     panda.print()
-#     # panda.save_data()
+#     panda.save_data()
 #
 # main_2()

@@ -19,7 +19,7 @@ class SupervisedModel:
 
      def correlation(self):
          dataframe = self.data
-         print(dataframe.corr()['Income_diff'])
+         print(dataframe.corr()['Population_diff'])
 
 def main():
     model = SupervisedModel()

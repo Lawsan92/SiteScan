@@ -118,7 +118,6 @@ class Data:
 
         return table_payload
 
-
 def main():
     data = Data(78735)
     data.API_fetch()

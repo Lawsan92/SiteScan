@@ -4,8 +4,12 @@ import csv
 class Database:
     def __init__(self):
         self.data = {}
+        self.dcids = ['zip/78735', 'zip/78730', 'zip/78721', 'zip/78729', 'zip/78734', 'zip/78652', 'zip/78725', 'zip/78617', 'zip/78703', 'zip/78645', 'zip/78701', 'zip/78719', 'zip/78737', 'zip/78652', 'zip/78681', 'zip/78758', 'zip/78738', 'zip/78705']
+        self.zip_keys = [78735, 78730, 78721, 78729, 78734, 78652, 78725, 78617, 78703, 78645, 78701, 78719, 78737, 78652, 78681, 78758, 78738, 78705]
+        return
 
     def API_fetch(self):
+        print('fetching data from API...')
         api_key = "AIzaSyCTI4Xz-UW_G2Q2RfknhcfdAnTHq5X5XuI"  # Replace with your API key
         client = DataCommonsClient(api_key=api_key)
         self.data = client.observation.fetch(
@@ -18,13 +22,14 @@ class Database:
                 'Count_Person_BelowPovertyLevelInThePast12Months',
             ],
             date='all',
-            entity_dcids=['zip/78735', 'zip/78730', 'zip/78721', 'zip/78729', 'zip/78734', 'zip/78652', 'zip/78725', 'zip/78617', 'zip/78703', 'zip/78645', 'zip/78701']
+            entity_dcids= self.dcids
         )
 
     def print(self):
         print(self.data)
 
     def model_data(self):
+        print('cleaning and modeling data...')
         data_model = {}
         data_keys = [
             "Count_Person",
@@ -34,7 +39,7 @@ class Database:
             'Count_HousingUnit',
             'Count_Person_BelowPovertyLevelInThePast12Months',
         ]
-        zip_keys = [78735, 78730, 78721, 78729, 78734, 78652, 78725, 78617, 78703, 78645, 78701]
+        zip_keys = self.zip_keys
 
         for key in data_keys:
             for dataset in self.data.byVariable[key]:
@@ -44,7 +49,6 @@ class Database:
                         def missing_entry():
                             if i < len(filtered_dataset) - 1:
                                 if int(filtered_dataset[i + 1].date) != int(filtered_dataset[i].date) + 1:
-                                    print(filtered_dataset[i + 1].date, filtered_dataset[i].date)
                                     dummy_data = type('Observation', (object,), {
                                         'date': int(filtered_dataset[i].date) + 1,
                                         'value': 'null'
@@ -61,6 +65,7 @@ class Database:
         self.data = data_model
 
     def save_data(self):
+        print('saving data...')
         with open('csv/dataset.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(['Year', 'Zip Code', 'Population', 'Income', 'Home Value', 'Commute Time', 'Poverty'])
@@ -71,12 +76,12 @@ class Database:
     def get_data(self):
         return self.data
 
-# main logic
-def main():
-    data = Database()
-    data.API_fetch()
-    data.model_data()
-    data.save_data()
-    return
-
-main()
+# # main logic
+# def main():
+#     data = Database()
+#     data.API_fetch()
+#     data.model_data()
+#     data.save_data()
+#     return
+#
+# main()
