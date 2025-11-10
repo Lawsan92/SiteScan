@@ -12,7 +12,6 @@ class Data:
                 "Count_Person",
                 "Mean_Income_Household",
                 'Median_HomeValue_HousingUnit_OccupiedHousingUnit_OwnerOccupied',
-                'Mean_CommuteTime_Person_Years16Onwards_WorkCommute_Employed_WorkedOutsideOfHome',
                 'Count_HousingUnit',
                 'Count_Person_BelowPovertyLevelInThePast12Months',
             ]
@@ -46,7 +45,7 @@ class Data:
         print(self.data)
 
     def graph_data_line(self):
-        print('generating line graphs...')
+        print('generating graphs...')
         data = self.data
 
         # X-data points (= years), Y-data points (= population)
@@ -57,71 +56,46 @@ class Data:
             for item in dataset:
                 data_list[key].append(int(item.value))
 
-        print(data_list)
         self.data = data_list
         # draw the line graph, i.e., the matplotlib plot figure
 
-        def graph_population(year_list, data_list):
+        graph_payload = {}
 
+        for key, dataset in data_list.items():
             # generate plot
             plt.figure(figsize=(10, 6))
-            plt.title(f'Population of {self.zip}')
-            plt.xlabel('Year')
-            plt.ylabel('Population (in thousands)')
-            plt.plot(year_list, data_list, color='blue')
+            plt.title(f'{key} of {self.zip}')
+            plt.xlabel(f'{key}')
+            plt.ylabel(f'{key}')
+            plt.plot(year_list, dataset, color='blue')
 
-            print('generating graph HTML image...')
             #convert to html markdown element
             graph_buffer_file = BytesIO()
             plt.savefig(graph_buffer_file, format='png')
             graph_buffer_file_base64 = base64.b64encode(graph_buffer_file.getvalue())
             graph_buffer_file_html = graph_buffer_file_base64.decode('utf-8')
             graph_html = '<img src=\'data:image/png;base64,{}\'>'.format(graph_buffer_file_html)
-            return graph_html
-
-        def graph_income(year_list, data_list):
-
-            # generate plot
-            plt.figure(figsize=(10, 6))
-            plt.title(f'Household Median Income for {self.zip}')
-            plt.xlabel('Year')
-            plt.ylabel('Population (in thousands)')
-            plt.plot(year_list, data_list, color='blue')
-
-            print('generating graph HTML image...')
-            #convert to html markdown element
-            graph_buffer_file = BytesIO()
-            plt.savefig(graph_buffer_file, format='png')
-            graph_buffer_file_base64 = base64.b64encode(graph_buffer_file.getvalue())
-            graph_buffer_file_html = graph_buffer_file_base64.decode('utf-8')
-            graph_html = '<img src=\'data:image/png;base64,{}\'>'.format(graph_buffer_file_html)
-            return graph_html
-
-        graph_payload = {
-            'pop_graph': graph_population(year_list, data_list['Count_Person']),
-            'income_graph': graph_income(year_list, data_list['Mean_Income_Household']),
-        }
+            graph_payload[key] = graph_html
 
         return graph_payload
 
     def graph_data_table(self):
-        print('generating table graphs...')
+        print('generating tables...')
         data = self.data
         year_list = self.year_list
+        table_payload = {}
 
-        def table_population(year_list, data_list):
-            print('generating population table...')
+        for key, dataset in data.items():
             # Column labels
-            col_labels = ['Year', 'Population']
+            col_labels = ['Year', f'{key}']
 
             # Data for the table
             table_data = []
 
-            for index, item in enumerate(data_list):
+            for index, item in enumerate(dataset):
                 year = year_list[index]
-                population = int(data_list[index])
-                table_data.append([year, population])
-            print('table_data:', table_data)
+                item = int(dataset[index])
+                table_data.append([year, item])
 
             # Create a figure and axes
             fig, ax = plt.subplots(figsize=(6, 3))
@@ -132,41 +106,7 @@ class Data:
 
             # Create the table fig
             ax.table(cellText=table_data, colLabels=col_labels, loc='center', cellLoc='center')
-            ax.set_title(f'Population of {self.zip}')
-
-            print('generating population table HTML image...')
-            # convert table fig to html markdown
-            table_file = BytesIO()
-            fig.savefig(table_file, format='png')
-            table_file_encoded = base64.b64encode(table_file.getvalue()).decode('utf-8')
-            table_html = '<img src=\'data:image/png;base64,{}\'>'.format(table_file_encoded)
-
-            return table_html
-
-        def table_income(year_list, data_list):
-            print('generating income table...')
-
-            # Column labels
-            col_labels = ['Year', 'Income']
-
-            # Data for the table
-            table_data = []
-
-            for index, item in enumerate(data_list):
-                year = year_list[index]
-                population = int(data_list[index])
-                table_data.append([year, population])
-
-            # Create a figure and axes
-            fig, ax = plt.subplots(figsize=(6, 3))
-
-            # Hide the axes to display only the table
-            ax.axis('off')
-            ax.axis('tight')  # Adjust limits to fit the table
-
-            # Create the table fig
-            ax.table(cellText=table_data, colLabels=col_labels, loc='center', cellLoc='center')
-            ax.set_title(f'Household Median Income for {self.zip}')
+            ax.set_title(f'{key} of {self.zip}')
 
             # convert table fig to html markdown
             table_file = BytesIO()
@@ -174,12 +114,7 @@ class Data:
             table_file_encoded = base64.b64encode(table_file.getvalue()).decode('utf-8')
             table_html = '<img src=\'data:image/png;base64,{}\'>'.format(table_file_encoded)
 
-            return table_html
-
-        table_payload = {
-            'pop_table': table_population(year_list, data['Count_Person']),
-            'income_table': table_income(year_list, data['Mean_Income_Household']),
-        }
+            table_payload[key] = table_html
 
         return table_payload
 

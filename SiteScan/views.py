@@ -9,10 +9,13 @@ def index(request):
     if request.method == 'POST':
         form = SiteScanForm(request.POST)
         if form.is_valid():
-            data = Data(form.cleaned_data['user_zip'])
+            zip_code = form.cleaned_data['user_zip']
+            data = Data(zip_code)
+            data.API_fetch()
+            data.model_data()
             dataset = data.data
             err = ''
-            if not dataset:
+            if not data:
                 table = []
                 line_graph = []
                 err = 'No data found for this zip code'
