@@ -27,14 +27,13 @@ class UnsupervisedModel:
         apriori_itemsets['length'] = apriori_itemsets['itemsets'].apply(lambda x: len(x))
         apriori_itemsets = apriori_itemsets[(apriori_itemsets['length'] >= 2) &
                           (apriori_itemsets['support'] >= 0.4)]
-
         apriori_itemsets = apriori_itemsets.sort_values(by='support', ascending=False)
         return apriori_itemsets
 
     def save_model(self):
-        with open('csv/apriori_model.csv', 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerows(self.apriori_model())
+        data = self.apriori_model()
+        dataframe = pd.DataFrame(data)
+        data.to_csv('csv/apriori_model.csv')
 
 def main():
     model = UnsupervisedModel()
