@@ -11,7 +11,7 @@ def main():
     print('done\n')
     panda = PandaDataframe()
     panda.load_dataframe()
-    panda.to_percentages(panda.dataframe)
+    panda.to_percentages()
     panda.fill_discretes()
     panda.filter_cont_cols()
     panda.bin_items()
@@ -23,7 +23,7 @@ main()
 def main_2():
     panda = PandaDataframe()
     panda.load_dataframe()
-    panda.to_percentages(panda.dataframe)
+    panda.to_percentages()
     panda.readd_keys()
     panda.save_data()
 

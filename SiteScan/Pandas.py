@@ -20,7 +20,7 @@ class PandaDataframe:
 
         self.dataframe = dataframe
 
-    def to_percentages(self, dataframe):
+    def to_percentages(self):
         print('converting to datapoints percentages')
         self.dataframe = self.dataframe.pct_change()
         self.dataframe = self.dataframe.apply(lambda x: x * 100)
