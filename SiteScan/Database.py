@@ -46,6 +46,7 @@ class Database:
                 for zip_key in zip_keys:
                     filtered_dataset = dataset[1][f'zip/{zip_key}'].orderedFacets[0].observations
                     for i, entry in enumerate(filtered_dataset):
+
                         def missing_entry():
                             if i < len(filtered_dataset) - 1:
                                 if int(filtered_dataset[i + 1].date) != int(filtered_dataset[i].date) + 1:
@@ -56,6 +57,7 @@ class Database:
                                     filtered_dataset.insert(i + 1, dummy_data)
                             return
                         missing_entry()
+
                         year = entry.date
                         value = entry.value
                         model_key = '[' + str(year) + '|' + str(zip_key) + ']'

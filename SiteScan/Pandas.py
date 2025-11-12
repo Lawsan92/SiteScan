@@ -25,10 +25,9 @@ class PandaDataframe:
         for col in numeric_cols:
             # Compute pct_change() within each Zip Code group
             df[f'{col}_pct_change'] = df.groupby('Zip Code')[col].pct_change() * 100
-
         df = df.round(2)
 
-        print(df.head())
+        # print(df.head())
         self.dataframe = df
 
         df = df.drop(['Year', 'Zip Code','Population','Income', 'Home Value','Commute Time','Poverty', 'Year_pct_change', 'Zip Code_pct_change'], axis=1)
@@ -70,7 +69,6 @@ class PandaDataframe:
         def bin_increase():
             dataframe = self.increased_dataframe.copy()
             cols = dataframe.columns
-            print(cols)
             itemsets = []
             for index, row in dataframe.iterrows():
                 basket = []
@@ -83,7 +81,6 @@ class PandaDataframe:
             with open('csv/increase/binned_dataset_increase.csv', 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerows(itemsets)
-
         bin_increase()
 
         def bin_decrease():
@@ -96,9 +93,8 @@ class PandaDataframe:
                     if item == 1.0:
                         basket.append(cols[i])
                 itemsets.append(basket)
-            print(itemsets)
-            print('saving decreased binned dataframe...')
 
+            print('saving decreased binned dataframe...')
             with open('csv/decrease/binned_dataset_decrease.csv', 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerows(itemsets)
@@ -107,11 +103,11 @@ class PandaDataframe:
     def print(self):
         print(self.dataframe)
 
-def main():
-    panda = PandaDataframe()
-    panda.load_dataframe()
-    panda.to_percentages()
-    panda.discretize()
-    panda.bin_items()
-    return
-main()
+# def main():
+#     panda = PandaDataframe()
+#     panda.load_dataframe()
+#     panda.to_percentages()
+#     panda.discretize()
+#     panda.bin_items()
+#     return
+# main()

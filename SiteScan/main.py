@@ -5,7 +5,6 @@ def main():
     database = Database()
     database.API_fetch()
     database.model_data()
-    database.print()
     database.save_data()
     print('done\n')
     panda = PandaDataframe()
