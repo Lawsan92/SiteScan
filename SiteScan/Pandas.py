@@ -30,11 +30,13 @@ class PandaDataframe:
         # print(df.head())
         self.dataframe = df
 
-        df = df.drop(['Year', 'Zip Code','Population','Income', 'Home Value','Commute Time','Poverty', 'Year_pct_change', 'Zip Code_pct_change'], axis=1)
+        df = df.drop(['Population','Income', 'Home Value','Commute Time','Poverty', 'Year_pct_change', 'Zip Code_pct_change'], axis=1)
+        df.to_csv('csv/grouped_dataset_percentages.csv')
+        df = df.drop(
+            ['Year', 'Zip Code'], axis=1)
         df = df.drop([0])
         self.dataframe = df
         print('saving percentages to csv file...')
-        df.to_csv('csv/grouped_dataset_percentages.csv')
 
     def discretize(self):
         print('converting continuous variables to discrete variables...')
@@ -43,9 +45,7 @@ class PandaDataframe:
         def discretize_increase():
             increase_data = self.dataframe.copy()
             for i, col in enumerate(cont_cols):
-                increase_data[col] = (increase_data[col] > 0).astype(int)
-                increase_data.loc[increase_data[col] > 0, col] = 1
-                increase_data.loc[increase_data[col] < 0, col] = 0
+                increase_data[col] = (increase_data[col] > 5).astype(int)
             print('saving increasing discrete dataframe to csv file...')
             increase_data.to_csv('csv/increase/increase_discrete_dataset.csv')
             return increase_data
@@ -55,8 +55,7 @@ class PandaDataframe:
         def discretize_decrease():
             decrease_data = self.dataframe.copy()
             for i, col in enumerate(cont_cols):
-                decrease_data.loc[decrease_data[col] > 0, col] = 0
-                decrease_data.loc[decrease_data[col] < 0, col] = 1
+                decrease_data[col] = (decrease_data[col] < -5).astype(int)
             print('saving decreasing discrete dataframe to csv file...')
             decrease_data.to_csv('csv/decrease/decrease_discrete_dataset.csv')
             return decrease_data
