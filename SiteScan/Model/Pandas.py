@@ -1,5 +1,7 @@
 import pandas as pd
 import csv
+import os
+from SiteScan.settings import BASE_DIR
 
 class PandaDataframe:
 
@@ -7,6 +9,9 @@ class PandaDataframe:
     binned_dataframe = []
     increased_dataframe = []
     decreased_dataframe = []
+    base_path = os.path.join(BASE_DIR, 'SiteScan/csv/')
+    increase_path = os.path.join(base_path, 'increase')
+    decrease_path = os.path.join(base_path, 'decrease')
 
     def __init__(self):
         return
@@ -14,7 +19,7 @@ class PandaDataframe:
     def load_dataframe(self):
         print('loading data')
         # create dataframe and load it with raw CSV data
-        self.dataframe = pd.DataFrame(pd.read_csv('csv/dataset.csv'))
+        self.dataframe = pd.DataFrame(pd.read_csv(os.path.join(self.base_path, 'dataset.csv')))
 
     def to_percentages(self):
         print('Converting numeric columns to percentage changes by Zip Code...')
@@ -27,11 +32,10 @@ class PandaDataframe:
             df[f'{col}_pct_change'] = df.groupby('Zip Code')[col].pct_change() * 100
         df = df.round(2)
 
-        # print(df.head())
         self.dataframe = df
 
         df = df.drop(['Population','Income', 'Home Value','Commute Time','Poverty', 'Year_pct_change', 'Zip Code_pct_change'], axis=1)
-        df.to_csv('csv/grouped_dataset_percentages.csv')
+        df.to_csv(os.path.join(self.base_path,'grouped_dataset_percentages.csv'))
         df = df.drop(
             ['Year', 'Zip Code'], axis=1)
         df = df.drop([0])
@@ -46,8 +50,9 @@ class PandaDataframe:
             increase_data = self.dataframe.copy()
             for i, col in enumerate(cont_cols):
                 increase_data[col] = (increase_data[col] > 5).astype(int)
+            # save data to csv
             print('saving increasing discrete dataframe to csv file...')
-            increase_data.to_csv('csv/increase/increase_discrete_dataset.csv')
+            increase_data.to_csv(os.path.join(self.increase_path, 'increase_discrete_dataset.csv'))
             return increase_data
 
         self.increased_dataframe = discretize_increase()
@@ -57,7 +62,7 @@ class PandaDataframe:
             for i, col in enumerate(cont_cols):
                 decrease_data[col] = (decrease_data[col] < -5).astype(int)
             print('saving decreasing discrete dataframe to csv file...')
-            decrease_data.to_csv('csv/decrease/decrease_discrete_dataset.csv')
+            decrease_data.to_csv( os.path.join(self.decrease_path, 'decrease_discrete_dataset.csv'))
             return decrease_data
 
         self.decreased_dataframe =  discretize_decrease()
@@ -77,7 +82,7 @@ class PandaDataframe:
                 itemsets.append(basket)
 
             print('saving increase binned dataframe...')
-            with open('csv/increase/binned_dataset_increase.csv', 'w', newline='') as csvfile:
+            with open(os.path.join(self.base_path, 'binned_dataset_increase.csv'), 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerows(itemsets)
         bin_increase()
@@ -94,7 +99,7 @@ class PandaDataframe:
                 itemsets.append(basket)
 
             print('saving decreased binned dataframe...')
-            with open('csv/decrease/binned_dataset_decrease.csv', 'w', newline='') as csvfile:
+            with open(os.path.join(self.decrease_path, 'binned_dataset_decrease.csv'), 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerows(itemsets)
         bin_decrease()

@@ -33,17 +33,18 @@
     </form>
     <div class="content">
         {% if dataset %}
-        <div className="line_graphs">
-            {% for key, graph in line_graph.items %}
-               <div> {{ graph|safe }} </div>
-            {% endfor %}
-
-        </div>
-        <div className="tables">
-            {% for key, item in table.items %}
-               <div> {{ item|safe }} </div>
-            {% endfor %}
-        </div>
+            <div>{{ linear_model|safe }}</div>
+            <div>{{ linear_table|safe }}</div>
+{#        <div className="line_graphs">#}
+{#            {% for key, graph in line_graph.items %}#}
+{#               <div> {{ graph|safe }} </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        <div className="tables">#}
+{#            {% for key, item in table.items %}#}
+{#               <div> {{ item|safe }} </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
         {% else %}
             <p class="error">{{ err }}</p>
             {% load static %}

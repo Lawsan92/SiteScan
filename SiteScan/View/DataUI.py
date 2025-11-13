@@ -76,6 +76,7 @@ class Data:
             graph_buffer_file_html = graph_buffer_file_base64.decode('utf-8')
             graph_html = '<img src=\'data:image/png;base64,{}\'>'.format(graph_buffer_file_html)
             graph_payload[key] = graph_html
+            plt.close()
 
         return graph_payload
 
@@ -113,8 +114,8 @@ class Data:
             fig.savefig(table_file, format='png')
             table_file_encoded = base64.b64encode(table_file.getvalue()).decode('utf-8')
             table_html = '<img src=\'data:image/png;base64,{}\'>'.format(table_file_encoded)
-
             table_payload[key] = table_html
+            plt.close()
 
         return table_payload
 

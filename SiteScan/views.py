@@ -1,8 +1,9 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.template import loader
-from django.shortcuts import render
-from .DataUI import Data
-from .forms import SiteScanForm
+from SiteScan.View.DataUI import Data
+from SiteScan.View.forms import SiteScanForm
+from SiteScan.Model.Supervised_Model import SupervisedModel
+
 def index(request):
     template = loader.get_template('index.html')
     context = {}
@@ -14,6 +15,12 @@ def index(request):
             data.API_fetch()
             data.model_data()
             dataset = data.data
+            model = SupervisedModel()
+            model.import_data()
+            model.get_slopes()
+            model.find_y()
+            linear_model = model.plot_linear_regression()
+            linear_table = model.linear_regression_table()
             err = ''
             if not data:
                 table = []
@@ -22,7 +29,7 @@ def index(request):
             else:
                 line_graph = data.graph_data_line()
                 table = data.graph_data_table()
-            context = {'dataset': dataset, 'line_graph': line_graph, 'table': table, 'form': form, 'err' : err}
+            context = {'dataset': dataset, 'line_graph': line_graph, 'table': table, 'form': form, 'err' : err, 'linear_model': linear_model, 'linear_table': linear_table}
     else:
         form = SiteScanForm()
         context = {'form': form}

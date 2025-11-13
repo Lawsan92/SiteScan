@@ -15,12 +15,12 @@ class UnsupervisedModel:
 
         def load_increase_data():
             print('loading increase data...')
-            self.increase_data = pd.read_csv('csv/increase/increase_discrete_dataset.csv' )
+            self.increase_data = pd.read_csv('../csv/increase/increase_discrete_dataset.csv')
         load_increase_data()
 
         def load_decrease_data():
             print('loading decrease data...')
-            self.decrease_data = pd.read_csv('csv/decrease/decrease_discrete_dataset.csv')
+            self.decrease_data = pd.read_csv('../csv/decrease/decrease_discrete_dataset.csv')
         load_decrease_data()
 
     def transaction_encoder(self):

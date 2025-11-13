@@ -1,4 +1,4 @@
-from SiteScan.DataUI import Data
+from SiteScan.View.DataUI import Data
 
 # data = Data('78735')
 # data.graph_data_line()

@@ -1,13 +1,15 @@
 from datacommons_client.client import DataCommonsClient
+from SiteScan.settings import BASE_DIR
 import csv
+import os
 
 class Database:
     def __init__(self):
         self.data = {}
         # self.dcids = ['zip/78735', 'zip/78730', 'zip/78721', 'zip/78729', 'zip/78734', 'zip/78652', 'zip/78725', 'zip/78617', 'zip/78703', 'zip/78645', 'zip/78701', 'zip/78719', 'zip/78737', 'zip/78652', 'zip/78681', 'zip/78758', 'zip/78738', 'zip/78705', 'zip/78717', 'zip/78742']
         # self.zip_keys = [78735, 78730, 78721, 78729, 78734, 78652, 78725, 78617, 78703, 78645, 78701, 78719, 78737, 78652, 78681, 78758, 78738, 78705, 78717, 78742]
-        self.dcids = ['zip/78734']
-        self.zip_keys = [78734]
+        self.dcids = ['zip/78735']
+        self.zip_keys = [78735]
         return
 
     def API_fetch(self):
@@ -70,7 +72,9 @@ class Database:
 
     def save_data(self):
         print('saving data...')
-        with open('csv/dataset.csv', 'w', newline='') as csvfile:
+        base_path = BASE_DIR
+        base_path = os.path.join(base_path, 'SiteScan/csv/')
+        with open( os.path.join(base_path, 'dataset.csv'), 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(['Year', 'Zip Code', 'Population', 'Income', 'Home Value', 'Commute Time', 'Poverty'])
             for key, entry in self.data.items():
