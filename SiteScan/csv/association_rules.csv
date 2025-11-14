@@ -1,0 +1,11 @@
+,antecedents,consequents,support,confidence,lift
+19,frozenset({'Population_pct_change'}),frozenset({'Poverty_pct_change'}),57.32,82.46,120.02
+18,frozenset({'Poverty_pct_change'}),frozenset({'Population_pct_change'}),57.32,83.43,120.02
+15,frozenset({'Population_pct_change'}),frozenset({'Income_pct_change'}),57.32,82.46,113.96
+14,frozenset({'Income_pct_change'}),frozenset({'Population_pct_change'}),57.32,79.21,113.96
+2,frozenset({'Income_pct_change'}),frozenset({'Commute Time_pct_change'}),36.18,50.0,111.82
+3,frozenset({'Commute Time_pct_change'}),frozenset({'Income_pct_change'}),36.18,80.91,111.82
+9,frozenset({'Income_pct_change'}),frozenset({'Home Value_pct_change'}),61.79,85.39,110.56
+8,frozenset({'Home Value_pct_change'}),frozenset({'Income_pct_change'}),61.79,80.0,110.56
+1,frozenset({'Commute Time_pct_change'}),frozenset({'Home Value_pct_change'}),37.8,84.55,109.46
+0,frozenset({'Home Value_pct_change'}),frozenset({'Commute Time_pct_change'}),37.8,48.95,109.46

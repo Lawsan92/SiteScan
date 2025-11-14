@@ -1,0 +1,32 @@
+,support,itemsets,length
+1,0.7723577235772358,frozenset({'Home Value_pct_change'}),1
+2,0.7235772357723578,frozenset({'Income_pct_change'}),1
+3,0.6951219512195121,frozenset({'Population_pct_change'}),1
+4,0.6869918699186992,frozenset({'Poverty_pct_change'}),1
+9,0.6178861788617886,"frozenset({'Home Value_pct_change', 'Income_pct_change'})",2
+14,0.573170731707317,"frozenset({'Poverty_pct_change', 'Population_pct_change'})",2
+12,0.573170731707317,"frozenset({'Population_pct_change', 'Income_pct_change'})",2
+10,0.5691056910569106,"frozenset({'Home Value_pct_change', 'Population_pct_change'})",2
+11,0.5691056910569106,"frozenset({'Home Value_pct_change', 'Poverty_pct_change'})",2
+13,0.532520325203252,"frozenset({'Poverty_pct_change', 'Income_pct_change'})",2
+21,0.4796747967479675,"frozenset({'Home Value_pct_change', 'Population_pct_change', 'Income_pct_change'})",3
+23,0.47560975609756095,"frozenset({'Home Value_pct_change', 'Poverty_pct_change', 'Population_pct_change'})",3
+24,0.4715447154471545,"frozenset({'Poverty_pct_change', 'Population_pct_change', 'Income_pct_change'})",3
+22,0.45528455284552843,"frozenset({'Home Value_pct_change', 'Poverty_pct_change', 'Income_pct_change'})",3
+0,0.44715447154471544,frozenset({'Commute Time_pct_change'}),1
+29,0.3983739837398374,"frozenset({'Home Value_pct_change', 'Poverty_pct_change', 'Population_pct_change', 'Income_pct_change'})",4
+5,0.3780487804878049,"frozenset({'Home Value_pct_change', 'Commute Time_pct_change'})",2
+6,0.3617886178861789,"frozenset({'Income_pct_change', 'Commute Time_pct_change'})",2
+7,0.32926829268292684,"frozenset({'Population_pct_change', 'Commute Time_pct_change'})",2
+8,0.3130081300813008,"frozenset({'Poverty_pct_change', 'Commute Time_pct_change'})",2
+15,0.3048780487804878,"frozenset({'Home Value_pct_change', 'Income_pct_change', 'Commute Time_pct_change'})",3
+18,0.2845528455284553,"frozenset({'Income_pct_change', 'Population_pct_change', 'Commute Time_pct_change'})",3
+20,0.2682926829268293,"frozenset({'Poverty_pct_change', 'Population_pct_change', 'Commute Time_pct_change'})",3
+16,0.2682926829268293,"frozenset({'Home Value_pct_change', 'Population_pct_change', 'Commute Time_pct_change'})",3
+19,0.26422764227642276,"frozenset({'Income_pct_change', 'Poverty_pct_change', 'Commute Time_pct_change'})",3
+17,0.26422764227642276,"frozenset({'Home Value_pct_change', 'Poverty_pct_change', 'Commute Time_pct_change'})",3
+25,0.23577235772357724,"frozenset({'Home Value_pct_change', 'Income_pct_change', 'Population_pct_change', 'Commute Time_pct_change'})",4
+28,0.23577235772357724,"frozenset({'Poverty_pct_change', 'Income_pct_change', 'Population_pct_change', 'Commute Time_pct_change'})",4
+26,0.22357723577235772,"frozenset({'Home Value_pct_change', 'Income_pct_change', 'Poverty_pct_change', 'Commute Time_pct_change'})",4
+27,0.21951219512195122,"frozenset({'Home Value_pct_change', 'Poverty_pct_change', 'Population_pct_change', 'Commute Time_pct_change'})",4
+30,0.1951219512195122,"frozenset({'Home Value_pct_change', 'Poverty_pct_change', 'Income_pct_change', 'Population_pct_change', 'Commute Time_pct_change'})",5
