@@ -59,8 +59,8 @@ class SupervisedModel:
         print('plotting linear regression model...')
         plt.scatter(x, y)
         plt.title(f'Store profits for {self.zip}')
-        plt.xlabel('Store profits')
-        plt.ylabel('Year')
+        plt.xlabel('Year')
+        plt.ylabel('Store profits (%)')
         plt.plot(x, intercept + slope * x, 'r')
         # plt.show()
 
@@ -76,14 +76,14 @@ class SupervisedModel:
         print('generating linear regression table...')
         x = self.data['Year']
         y = self.y
-        col_labels = ['Year', 'Store Profits']
+        col_labels = ['Year', 'Store Profits (%)']
 
         # Data for the table
         table_data = []
 
         for index, item in enumerate(y):
             year = x[index]
-            item = y[index]
+            item = round(y[index], 2)
             table_data.append([year, item])
 
         # Create a figure and axes
