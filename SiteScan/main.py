@@ -28,6 +28,7 @@ def main(zip_code):
         'linear_model': model.plot_linear_regression(),
         'linear_table': model.linear_regression_table()
     }
+    print('sending linear regression payload to frontend...')
     print('done\n')
     return payload
 # main(78735)
