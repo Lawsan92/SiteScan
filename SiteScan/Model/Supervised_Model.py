@@ -12,10 +12,16 @@ class SupervisedModel:
     y = []
     base_path = os.path.join(BASE_DIR, 'SiteScan/csv/')
 
+    def __init__(self, user_zip=None):
+        self.zip = int(user_zip)
+
     def import_data(self):
         print('importing data...')
-        self.data = pd.read_csv(os.path.join(self.base_path, 'grouped_dataset_percentages.csv'),
-                                skiprows=[1], usecols=range(1, 8))
+        self.data = pd.read_csv(os.path.join(self.base_path, 'grouped_dataset_percentages.csv'), usecols=range(1, 8))
+
+        self.data = self.data[self.data['Zip Code'] == self.zip]
+        self.data = self.data.iloc[1:]
+        self.data = self.data.reset_index(drop=True)
 
     def get_slopes(self):
         data = self.data
@@ -52,7 +58,7 @@ class SupervisedModel:
         slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
         print('plotting linear regression model...')
         plt.scatter(x, y)
-        plt.title('Store profits vs. Year')
+        plt.title(f'Store profits for {self.zip}')
         plt.xlabel('Store profits')
         plt.ylabel('Year')
         plt.plot(x, intercept + slope * x, 'r')
@@ -70,7 +76,6 @@ class SupervisedModel:
         print('generating linear regression table...')
         x = self.data['Year']
         y = self.y
-
         col_labels = ['Year', 'Store Profits']
 
         # Data for the table
@@ -90,18 +95,18 @@ class SupervisedModel:
 
         # Create the table fig
         ax.table(cellText=table_data, colLabels=col_labels, loc='center', cellLoc='center')
-        ax.set_title('Store profits vs. Year')
+        ax.set_title(f'Store profits for {self.zip}')
 
         # convert table fig to html markdown
         table_file = BytesIO()
         fig.savefig(table_file, format='png')
         table_file_encoded = base64.b64encode(table_file.getvalue()).decode('utf-8')
         table_html = '<img src=\'data:image/png;base64,{}\'>'.format(table_file_encoded)
-
+        plt.close()
         return table_html
 
 # def main():
-#     model = SupervisedModel()
+#     model = SupervisedModel(78735)
 #     model.import_data()
 #     model.get_slopes()
 #     model.find_y()

@@ -3,6 +3,7 @@ from django.template import loader
 from SiteScan.View.DataUI import Data
 from SiteScan.View.forms import SiteScanForm
 from SiteScan.Model.Supervised_Model import SupervisedModel
+from SiteScan.main import main
 
 def index(request):
     template = loader.get_template('index.html')
@@ -15,12 +16,9 @@ def index(request):
             data.API_fetch()
             data.model_data()
             dataset = data.data
-            model = SupervisedModel()
-            model.import_data()
-            model.get_slopes()
-            model.find_y()
-            linear_model = model.plot_linear_regression()
-            linear_table = model.linear_regression_table()
+            payload = main(zip_code)
+            linear_model = payload['linear_model']
+            linear_table = payload['linear_table']
             err = ''
             if not data:
                 table = []

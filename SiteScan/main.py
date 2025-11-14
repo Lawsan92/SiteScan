@@ -2,7 +2,8 @@ from SiteScan.Model.Database import Database
 from SiteScan.Model.Pandas import PandaDataframe
 from SiteScan.Model.Supervised_Model import SupervisedModel
 
-def main():
+def main(zip_code):
+
     print('starting Database.py...')
     database = Database()
     database.API_fetch()
@@ -17,11 +18,16 @@ def main():
     panda.bin_items()
     print('done\n')
     print('starting Supervised_Model.py...')
-    model = SupervisedModel()
+    print(f'zip code: {zip_code}')
+    model = SupervisedModel(zip_code)
     model.import_data()
     model.get_slopes()
     model.find_y()
-    model.plot_linear_regression()
+    payload = {
+        'dataset': database,
+        'linear_model': model.plot_linear_regression(),
+        'linear_table': model.linear_regression_table()
+    }
     print('done\n')
-    return
-main()
+    return payload
+# main(78735)

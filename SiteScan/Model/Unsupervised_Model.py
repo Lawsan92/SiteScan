@@ -1,12 +1,18 @@
 import csv
+import os
 import pandas as pd
 from mlxtend.evaluate import lift_score
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
+from SiteScan.settings import BASE_DIR
 
 class UnsupervisedModel:
+
     increase_data = []
     decrease_data = []
+    base_path = os.path.join(BASE_DIR, 'SiteScan/csv/')
+    increase_path = os.path.join(base_path, 'increase')
+    decrease_path = os.path.join(base_path, 'decrease')
 
     def __init__(self):
         return
@@ -15,12 +21,12 @@ class UnsupervisedModel:
 
         def load_increase_data():
             print('loading increase data...')
-            self.increase_data = pd.read_csv('../csv/increase/increase_discrete_dataset.csv')
+            self.increase_data = pd.read_csv(os.path.join(self.increase_path, 'increase_discrete_dataset.csv'), usecols=[1, 2, 3, 4, 5])
         load_increase_data()
 
         def load_decrease_data():
             print('loading decrease data...')
-            self.decrease_data = pd.read_csv('../csv/decrease/decrease_discrete_dataset.csv')
+            self.decrease_data = pd.read_csv(os.path.join(self.decrease_path, 'decrease_discrete_dataset.csv'), usecols=[1, 2, 3, 4, 5])
         load_decrease_data()
 
     def transaction_encoder(self):
@@ -54,7 +60,6 @@ class UnsupervisedModel:
         return apriori_itemsets
 
     def association_rules(self):
-
         def increase_association_rules():
             print('generating increase association rules...')
             # apriori_itemsets = apriori(self.increase_data, min_support=0.1, use_colnames=True)
@@ -80,8 +85,8 @@ class UnsupervisedModel:
 
             rules = rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']]
             rules.sort_values(by='lift', ascending=False, inplace=True)
-
-            rules.to_csv('csv/increase/increase_association_rules.csv')
+            print('saving increase association rules to csv file...')
+            rules.to_csv(os.path.join(self.increase_path, 'increase_association_rules.csv'))
         increase_association_rules()
 
         def decrease_association_rules():
@@ -97,7 +102,6 @@ class UnsupervisedModel:
             # rules.sort_values(by='lift', ascending=False, inplace=True)
             # rules = rules.head(10)
             # rules.to_csv('csv/decrease/decrease_association_rules.csv')
-
             frequent_itemsets = apriori(
                 self.decrease_data,
                 min_support=0.05,
@@ -109,11 +113,12 @@ class UnsupervisedModel:
                 metric="lift",
                 min_threshold=1.0
             )
+            print('rules:', rules)
 
             rules = rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']]
             rules.sort_values(by='lift', ascending=False, inplace=True)
-
-            rules.to_csv('csv/decrease/decrease_association_rules.csv')
+            print('saving decrease association rules to csv file...')
+            rules.to_csv(os.path.join(self.decrease_path, 'decrease_association_rules.csv'))
         decrease_association_rules()
 
     def save_model(self):
@@ -125,7 +130,7 @@ def main():
     model = UnsupervisedModel()
     model.load_data()
     # model.transaction_encoder()
-    model.apriori_model()
+    # model.apriori_model()
     model.association_rules()
     return
 main()
