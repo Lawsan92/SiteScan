@@ -55,11 +55,15 @@
                         <h4 class="text-secondary">Grouped Trends</h4>
                         {{ grouped_trends|safe }}
                     </div>
-                {% else %}
+                {% elif err%}
                     <p class="text-danger">{{ err }}</p>
                     {% load static %}
                     <div class="col-sm-7 ">
                         <img src="{% static 'template_plot.png' %}" alt="No data" class="rounded"/>
+                    </div>
+                {% else %}
+                    <div class="col-sm-7 bg-white rounded text-secondary">
+                        <h2>Enter your location's zip code to get an analysis</h2>
                     </div>
                 {% endif %}
             </div>
