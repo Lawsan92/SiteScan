@@ -119,14 +119,38 @@ class SupervisedModel:
             y_sum += i
         return round(y_sum/n, 2)
 
-def main():
-    model = SupervisedModel(78735)
-    model.import_data()
-    model.get_slopes()
-    model.find_y()
-    model.plot_linear_regression()
-    model.linear_regression_table()
-    model.ksi_val()
-    return
+    def grouped_trends(self):
+        print('generating grouped trends...')
+        data = self.data
+        plt.title(f'Grouped trends for {self.zip}')
+        plt.plot(data['Year'], data['Population_pct_change'], label='population', marker='o')
+        plt.plot(data['Year'], data['Income_pct_change'], label='income', marker='o')
+        plt.plot(data['Year'], data['Home Value_pct_change'], label='home value', marker='o')
+        plt.plot(data['Year'], data['Commute Time_pct_change'], label='commute', marker='o')
+        plt.plot(data['Year'], data['Poverty_pct_change'], label='poverty', marker='o')
+        plt.legend()
 
-main()
+        # convert table fig to html markdown
+        buffer_file = BytesIO()
+        plt.savefig( buffer_file, format='png')
+        graph_buffer_file_base64 = base64.b64encode(buffer_file.getvalue())
+        graph_buffer_file_html = graph_buffer_file_base64.decode('utf-8')
+        grouped_html = '<img src=\'data:image/png;base64,{}\'>'.format(graph_buffer_file_html)
+        plt.close()
+
+        return grouped_html
+
+
+
+# def main():
+#     model = SupervisedModel(78735)
+#     model.import_data()
+#     model.get_slopes()
+#     model.find_y()
+#     model.plot_linear_regression()
+#     model.linear_regression_table()
+#     model.ksi_val()
+#     model.grouped_trends()
+#     return
+#
+# main()

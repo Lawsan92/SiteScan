@@ -21,7 +21,6 @@
       </script>
         <div class="container-fluid p-5 bg-light text-black text-center min-vh-100">
             <h1 class="fieldset-heading">SiteScan</h1>
-
             <div class="row">
                 <form action="/" method="post">
                     <div class="d-flex justify-content-space-evenly align-items-center">
@@ -31,10 +30,10 @@
                     </div>
                 </form>
             </div>
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 {% if dataset %}
                     <p class="text-success">Request processed</p>
-                    <div class="col-sm-7 p-1 p-1">
+                    <div class="col-sm-5 p-1 p-1">
                         <h4 class="text-secondary">Regression Line</h4>
                         {{ linear_model|safe }}
                     </div>
@@ -51,6 +50,10 @@
                                 <h3 class=" text-success bg-white rounded p-3" style="width: fit-content">{{ ksi }}%</h3>
                             {% endif %}
                         </div>
+                    </div>
+                    <div class="col-sm-5 p-1 p-1">
+                        <h4 class="text-secondary">Grouped Trends</h4>
+                        {{ grouped_trends|safe }}
                     </div>
                 {% else %}
                     <p class="text-danger">{{ err }}</p>
