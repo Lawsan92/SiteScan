@@ -23,8 +23,10 @@ def main(zip_code):
     model.import_data()
     model.get_slopes()
     model.find_y()
+    if model.data.empty:
+        return {'data': model.data, 'linear_model': [], 'linear_table': [], 'ksi': [], 'grouped_trends': []}
     payload = {
-        'dataset': database,
+        'data': model.data,
         'linear_model': model.plot_linear_regression(),
         'linear_table': model.linear_regression_table(),
         'ksi': model.ksi_val(),

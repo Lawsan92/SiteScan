@@ -22,6 +22,7 @@ class SupervisedModel:
         self.data = self.data[self.data['Zip Code'] == self.zip]
         self.data = self.data.iloc[1:]
         self.data = self.data.reset_index(drop=True)
+        return self.data
 
     def get_slopes(self):
         data = self.data
@@ -143,7 +144,7 @@ class SupervisedModel:
 
 
 # def main():
-#     model = SupervisedModel(78735)
+#     model = SupervisedModel(78723)
 #     model.import_data()
 #     model.get_slopes()
 #     model.find_y()

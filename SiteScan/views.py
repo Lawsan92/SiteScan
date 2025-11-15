@@ -16,8 +16,10 @@ def index(request):
             data.model_data()
             dataset = data.data
             no_data = not dataset['Count_Person']
+            payload = main(zip_code)
+            payload_data = payload['data']
             err = ''
-            if no_data:
+            if payload_data.empty:
                 print('No data found for this zip code')
                 err = 'No data found for this zip code'
                 context = {'dataset': [], 'line_graph': [], 'table': [], 'form': form, 'err': err,
@@ -31,7 +33,7 @@ def index(request):
                 grouped_trends = payload['grouped_trends']
                 ksi = payload['ksi']
                 context = {
-                    'dataset': dataset,
+                    'dataset': data,
                     'line_graph': line_graph,
                     'table': table,
                     'form': form,
@@ -39,7 +41,8 @@ def index(request):
                     'linear_model': linear_model,
                     'linear_table': linear_table,
                     'ksi': ksi,
-                    'grouped_trends': grouped_trends
+                    'grouped_trends': grouped_trends,
+                    'payload_data': not payload_data.empty
                 }
     else:
         form = SiteScanForm()
