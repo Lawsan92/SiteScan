@@ -3,7 +3,6 @@ from SiteScan.Model.Pandas import PandaDataframe
 from SiteScan.Model.Supervised_Model import SupervisedModel
 
 def main(zip_code):
-
     print('starting Database.py...')
     database = Database()
     database.API_fetch()
