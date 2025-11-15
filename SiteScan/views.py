@@ -11,7 +11,7 @@ def index(request):
         form = SiteScanForm(request.POST)
         if form.is_valid():
             zip_code = form.cleaned_data['user_zip']
-            if not zip_code.isdigit() and len(zip_code) != 5:
+            if not zip_code.isdigit() or len(zip_code) != 5:
                 print('Invalid zip code')
                 err = 'Invalid zip code'
                 context = {'form': form, 'err': err}
