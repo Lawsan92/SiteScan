@@ -62,8 +62,10 @@
                         <img src="{% static 'template_plot.png' %}" alt="No data" class="rounded"/>
                     </div>
                 {% else %}
-                    <div class="col-sm-7 bg-white rounded text-secondary p-1 m-1">
+                    <div class="d-flex flex-column align-items-center justify-content-center" style="height: 60vh">
+                        <div class="col-sm-7 bg-white rounded text-secondary p-1 m-1">
                         <h2>Enter your location's zip code to get an analysis</h2>
+                    </div>
                     </div>
                 {% endif %}
             </div>

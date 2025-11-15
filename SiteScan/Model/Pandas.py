@@ -49,7 +49,7 @@ class PandaDataframe:
         def discretize_increase():
             increase_data = self.dataframe.copy()
             for i, col in enumerate(cont_cols):
-                increase_data[col] = (increase_data[col] > 5).astype(int)
+                increase_data[col] = (increase_data[col] >= 3).astype(int)
             # save data to csv
             print('saving increasing discrete dataframe to csv file...')
             increase_data.to_csv(os.path.join(self.increase_path, 'increase_discrete_dataset.csv'))
@@ -60,7 +60,7 @@ class PandaDataframe:
         def discretize_decrease():
             decrease_data = self.dataframe.copy()
             for i, col in enumerate(cont_cols):
-                decrease_data[col] = (decrease_data[col] < -5).astype(int)
+                decrease_data[col] = (decrease_data[col] <= -3).astype(int)
             print('saving decreasing discrete dataframe to csv file...')
             decrease_data.to_csv( os.path.join(self.decrease_path, 'decrease_discrete_dataset.csv'))
             return decrease_data

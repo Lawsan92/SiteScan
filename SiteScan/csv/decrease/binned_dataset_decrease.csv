@@ -1,6 +1,6 @@
 
 Income_pct_change
-
+Commute Time_pct_change
 
 
 
@@ -13,42 +13,42 @@ Commute Time_pct_change
 
 
 
-Income_pct_change
+Population_pct_change,Income_pct_change,Home Value_pct_change
 
 
 
 
 
-Income_pct_change
+Income_pct_change,Commute Time_pct_change
 Population_pct_change,Poverty_pct_change
 
 Income_pct_change
 
 
+Commute Time_pct_change
 
 
 
 
 
-
-
+Population_pct_change
 Population_pct_change,Poverty_pct_change
 
 
 
 
-
-
+Commute Time_pct_change
+Population_pct_change,Poverty_pct_change
 
 
 
 
 
 Poverty_pct_change
+Population_pct_change
 
 
-
-
+Commute Time_pct_change
 
 
 
@@ -65,49 +65,24 @@ Commute Time_pct_change
 
 Income_pct_change
 
-
-
+Income_pct_change
+Income_pct_change
 Population_pct_change
 
 
 
 
-Population_pct_change,Poverty_pct_change
+Population_pct_change,Commute Time_pct_change,Poverty_pct_change
 Income_pct_change
-Commute Time_pct_change
-
-
-
-Population_pct_change,Poverty_pct_change
-
-
 Population_pct_change,Commute Time_pct_change
 
 
 
+Population_pct_change,Poverty_pct_change
+Population_pct_change,Poverty_pct_change
+
+Population_pct_change,Commute Time_pct_change
 Commute Time_pct_change
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Commute Time_pct_change
@@ -115,11 +90,39 @@ Commute Time_pct_change
 
 
 
+
+Home Value_pct_change
+
+
+
+
+
+
+
+
+
+
+
+Income_pct_change,Commute Time_pct_change
+
+
+
+
+
+
 Commute Time_pct_change
+
+
+
+
+Commute Time_pct_change,Poverty_pct_change
 Home Value_pct_change
 
 Income_pct_change
 
+Commute Time_pct_change
+Commute Time_pct_change
+
 
 Commute Time_pct_change
 
@@ -131,12 +134,9 @@ Commute Time_pct_change
 
 
 
+Income_pct_change,Home Value_pct_change
 
-
-
-Home Value_pct_change
-
-
+Income_pct_change
 Population_pct_change,Poverty_pct_change
 
 
@@ -148,8 +148,8 @@ Population_pct_change,Income_pct_change
 Commute Time_pct_change,Poverty_pct_change
 
 Population_pct_change,Commute Time_pct_change,Poverty_pct_change
-Population_pct_change
-
+Population_pct_change,Poverty_pct_change
+Poverty_pct_change
 Home Value_pct_change
 Population_pct_change,Poverty_pct_change
 Home Value_pct_change,Commute Time_pct_change
@@ -162,20 +162,20 @@ Home Value_pct_change,Commute Time_pct_change
 Commute Time_pct_change
 Commute Time_pct_change
 
+Income_pct_change,Commute Time_pct_change
+
+
+
+
+
+
+
+
+
+
 Commute Time_pct_change
 
-
-
-
-
-
-
-
-
-
-
-
-
+Commute Time_pct_change
 Home Value_pct_change
 
 
@@ -188,46 +188,49 @@ Home Value_pct_change
 
 
 
+Commute Time_pct_change
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Income_pct_change
 
 
 Commute Time_pct_change
 
 
 
-Population_pct_change
+
 
 
 Commute Time_pct_change
 
 
+
+
 Income_pct_change
+Commute Time_pct_change
+
+Commute Time_pct_change
 
 
 
+Population_pct_change,Income_pct_change,Commute Time_pct_change
+Commute Time_pct_change
+
+Commute Time_pct_change
+
+
+Income_pct_change
 
 
 
 Home Value_pct_change
+Commute Time_pct_change
+Home Value_pct_change
+Population_pct_change,Home Value_pct_change
+
+
+Commute Time_pct_change
 
 
 
@@ -236,11 +239,8 @@ Home Value_pct_change
 
 
 
-
-
-
-
-Poverty_pct_change
+Commute Time_pct_change
+Population_pct_change,Poverty_pct_change
 
 
 
@@ -249,7 +249,7 @@ Poverty_pct_change
 Population_pct_change,Income_pct_change,Commute Time_pct_change,Poverty_pct_change
 Population_pct_change,Poverty_pct_change
 Home Value_pct_change
-Income_pct_change
+Population_pct_change,Income_pct_change,Commute Time_pct_change
 Population_pct_change,Poverty_pct_change
 Home Value_pct_change
 Home Value_pct_change,Poverty_pct_change
@@ -267,6 +267,9 @@ Population_pct_change,Home Value_pct_change,Commute Time_pct_change
 
 
 
+Commute Time_pct_change
+
+Commute Time_pct_change
 
 
 
@@ -276,10 +279,7 @@ Population_pct_change,Home Value_pct_change,Commute Time_pct_change
 
 
 
-
-
-
-
+Population_pct_change,Poverty_pct_change
 
 
 Commute Time_pct_change
@@ -298,14 +298,14 @@ Population_pct_change,Poverty_pct_change
 Commute Time_pct_change
 
 
-Commute Time_pct_change
+Population_pct_change,Commute Time_pct_change
 
 Commute Time_pct_change
 
 
 
 Income_pct_change,Commute Time_pct_change
-
+Income_pct_change
 Population_pct_change
 
 Commute Time_pct_change
