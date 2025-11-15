@@ -105,13 +105,25 @@ class SupervisedModel:
         plt.close()
         return table_html
 
-# def main():
-#     model = SupervisedModel(78735)
-#     model.import_data()
-#     model.get_slopes()
-#     model.find_y()
-#     model.plot_linear_regression()
-#     model.linear_regression_table()
-#     return
-#
-# main()
+    def ksi_val(self):
+        print('calculating KSI value...')
+        y = self.y
+        y_sum = 0
+        n = len(y)
+
+        for i in y:
+            print('i:', i)
+            y_sum += i
+        return round(y_sum/n, 2)
+
+def main():
+    model = SupervisedModel(78735)
+    model.import_data()
+    model.get_slopes()
+    model.find_y()
+    model.plot_linear_regression()
+    model.linear_regression_table()
+    model.ksi_val()
+    return
+
+main()

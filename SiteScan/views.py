@@ -28,7 +28,8 @@ def index(request):
                 payload = main(zip_code)
                 linear_model = payload['linear_model']
                 linear_table = payload['linear_table']
-                context = {'dataset': dataset, 'line_graph': line_graph, 'table': table, 'form': form, 'err' : err, 'linear_model': linear_model, 'linear_table': linear_table}
+                ksi = payload['ksi']
+                context = {'dataset': dataset, 'line_graph': line_graph, 'table': table, 'form': form, 'err' : err, 'linear_model': linear_model, 'linear_table': linear_table, 'ksi': ksi}
     else:
         form = SiteScanForm()
         context = {'form': form}

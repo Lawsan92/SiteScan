@@ -26,7 +26,8 @@ def main(zip_code):
     payload = {
         'dataset': database,
         'linear_model': model.plot_linear_regression(),
-        'linear_table': model.linear_regression_table()
+        'linear_table': model.linear_regression_table(),
+        'ksi': model.ksi_val()
     }
     print('sending linear regression payload to frontend...')
     print('done\n')

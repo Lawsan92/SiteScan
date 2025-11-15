@@ -1,1 +1,7 @@
 ,antecedents,consequents,support,confidence,lift
+2,frozenset({'Population_pct_change'}),frozenset({'Poverty_pct_change'}),0.033950617283950615,0.6111111111111112,9.900000000000002
+3,frozenset({'Poverty_pct_change'}),frozenset({'Population_pct_change'}),0.033950617283950615,0.55,9.900000000000002
+0,frozenset({'Population_pct_change'}),frozenset({'Commute Time_pct_change'}),0.012345679012345678,0.2222222222222222,2.769230769230769
+1,frozenset({'Commute Time_pct_change'}),frozenset({'Population_pct_change'}),0.012345679012345678,0.15384615384615385,2.7692307692307696
+4,frozenset({'Commute Time_pct_change'}),frozenset({'Poverty_pct_change'}),0.012345679012345678,0.15384615384615385,2.492307692307693
+5,frozenset({'Poverty_pct_change'}),frozenset({'Commute Time_pct_change'}),0.012345679012345678,0.2,2.492307692307693

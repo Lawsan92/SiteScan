@@ -34,8 +34,24 @@
             <div class="row">
                 {% if dataset %}
                     <p class="text-success">Request processed</p>
-                    <div class="col-sm-7">{{ linear_model|safe }}</div>
-                    <div class="col-sm-5">{{ linear_table|safe }}</div>
+                    <div class="col-sm-7 p-1 p-1">
+                        <h4 class="text-secondary">Regression Line</h4>
+                        {{ linear_model|safe }}
+                    </div>
+                    <div class="col-sm-5 p-1 p-1">
+                        <h4 class="text-secondary">Linear Regression Table</h4>
+                        {{ linear_table|safe }}
+                    </div>
+                    <div class="col-sm-5 p-1 p-1">
+                        <div class="d-flex flex-column align-items-center">
+                            <h4 class="text-secondary">KSI</h4>
+                            {% if ksi < 0 %}
+                                <h3 class=" text-danger bg-white rounded p-3" style="width: fit-content">{{ ksi }}%</h3>
+                            {% else %}
+                                <h3 class=" text-success bg-white rounded p-3" style="width: fit-content">{{ ksi }}%</h3>
+                            {% endif %}
+                        </div>
+                    </div>
                 {% else %}
                     <p class="text-danger">{{ err }}</p>
                     {% load static %}

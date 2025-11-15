@@ -62,18 +62,10 @@ class UnsupervisedModel:
     def association_rules(self):
         def increase_association_rules():
             print('generating increase association rules...')
-            # apriori_itemsets = apriori(self.increase_data, min_support=0.1, use_colnames=True)
-            # rules = association_rules(apriori_itemsets, metric="confidence", min_threshold=0.1)
-            # rules = rules[rules['antecedents'].apply(lambda x: len(x) == 1) & rules['consequents'].apply(lambda x: len(x) == 1)]
-            # print("Association Rules:", rules.shape[0])
-            # rules = rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']]
-            # rules.sort_values(by='lift', ascending=False, inplace=True)
-            # rules = rules.head(10)
-            # rules.to_csv('csv/increase/increase_association_rules.csv')
 
             frequent_itemsets = apriori(
                 self.increase_data,
-                min_support=0.05,
+                min_support=0.01,
                 use_colnames=True
             )
 
@@ -84,27 +76,16 @@ class UnsupervisedModel:
             )
 
             rules = rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']]
-            rules.sort_values(by='lift', ascending=False, inplace=True)
+            rules.sort_values(by='support', ascending=False, inplace=True)
             print('saving increase association rules to csv file...')
             rules.to_csv(os.path.join(self.increase_path, 'increase_association_rules.csv'))
         increase_association_rules()
 
         def decrease_association_rules():
             print('generating decrease association rules...')
-            # apriori_itemsets = apriori(self.decrease_data, min_support=0.1, use_colnames=True)
-            # rules = association_rules(apriori_itemsets, metric="confidence", min_threshold=0.1)
-            # rules = rules[rules['antecedents'].apply(lambda x: len(x) == 1) & rules['consequents'].apply(lambda x: len(x) == 1)]
-            # print("Association Rules:", rules.shape[0])
-            # # rules['support'] = round(rules['support'] * 100, 2)
-            # # rules['confidence'] = round(rules['confidence'] * 100, 2)
-            # # rules['lift'] = round(rules['lift'] * 100, 2)
-            # rules = rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']]
-            # rules.sort_values(by='lift', ascending=False, inplace=True)
-            # rules = rules.head(10)
-            # rules.to_csv('csv/decrease/decrease_association_rules.csv')
             frequent_itemsets = apriori(
                 self.decrease_data,
-                min_support=0.05,
+                min_support=0.01,
                 use_colnames=True
             )
 
@@ -116,7 +97,7 @@ class UnsupervisedModel:
             print('rules:', rules)
 
             rules = rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']]
-            rules.sort_values(by='lift', ascending=False, inplace=True)
+            rules.sort_values(by='support', ascending=False, inplace=True)
             print('saving decrease association rules to csv file...')
             rules.to_csv(os.path.join(self.decrease_path, 'decrease_association_rules.csv'))
         decrease_association_rules()
