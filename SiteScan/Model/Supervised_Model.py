@@ -55,6 +55,8 @@ class SupervisedModel:
         data = self.data
         x = data['Year']
         y = self.y
+        base_value = [i * 0 for i in range(len(x))]
+
         slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
         print('plotting linear regression model...')
         plt.scatter(x, y)
@@ -62,6 +64,7 @@ class SupervisedModel:
         plt.xlabel('Year')
         plt.ylabel('Store profits (%)')
         plt.plot(x, intercept + slope * x, 'r')
+        plt.plot(x, base_value, ':r')
         # plt.show()
 
         buffer_file = BytesIO()
