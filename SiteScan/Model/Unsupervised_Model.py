@@ -54,7 +54,7 @@ class UnsupervisedModel:
         apriori_itemsets = apriori(self.increase_data, min_support=0.1, use_colnames=True)
         apriori_itemsets['length'] = apriori_itemsets['itemsets'].apply(lambda x: len(x))
         # apriori_itemsets = apriori_itemsets[(apriori_itemsets['length'] >= 2) &
-        #                   (apriori_itemsets['support'] >= 0.4)]
+        #                   (apriori_itemsets['support'] >= 0.4)] mlx
         apriori_itemsets = apriori_itemsets.sort_values(by='support', ascending=False)
 
         return apriori_itemsets
