@@ -19,22 +19,25 @@ A financial forecasting application that assists in evaluating location suitabil
 ````
 $ git clone https://github.com/Lawsan92/SiteScan.git
 ````
-
 2. Navigate to the project's root repository:
 ```
-$ cd .../SiteScan
+$ cd path/to/SiteScan
 ```
-3. Open a Python virtual environment (command syntax may vary based on your computer's OS and Python version):
+3. Create a Python virtual environment file & filepath (command syntax may vary based on your computer's OS and Python version):
 ```aiignore
-python3 -m venv path/to/venv
+python3 -m name_of_venv path/to/venv
 ```
-4. Install the following Python libraries in your virtual environment:
+4. Activate the Python virtual environment:
+```aiignore
+$ source path/to/venv
+```
+5. Install the following Python libraries in your virtual environment:
 ```aiignore
 $ python3 -m pip install Django matplotlib datacommons_client scipy pandas mlxtend
 ```
-5. Run the Django server: 
+6. Start the Django server: 
 ```aiignore
-$ MPLBACKEND=Agg python manage.py runserver
+$ MPLBACKEND=Agg python path/to/manage.py runserver
 ```
 The 
 ``MPLBACKEND=Agg`` flag allows the matplotlib library to run in "headless mode". This prevents the Django server from crashing.
