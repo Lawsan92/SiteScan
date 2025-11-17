@@ -116,7 +116,6 @@ class SupervisedModel:
         n = len(y)
 
         for i in y:
-            print('i:', i)
             y_sum += i
         return round(y_sum/n, 2)
 
